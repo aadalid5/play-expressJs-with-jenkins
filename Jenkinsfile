@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh "docker build -t arieladalid/test-node ."
+                
+                dockerImage = docker.build("arieladalid/test-node")
             }
         }
 
