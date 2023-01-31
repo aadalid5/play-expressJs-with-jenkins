@@ -8,8 +8,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                
-                dockerImage = docker.build("arieladalid/test-node")
+                script {
+                    dockerImage = docker.build("arieladalid/test-node")
+                }
             }
         }
 
