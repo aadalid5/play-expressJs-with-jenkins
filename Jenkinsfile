@@ -11,10 +11,11 @@ pipeline {
                 script{
                     def dockerHome = tool 'mydocker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
+                    sh "systemctl start docker"
                 }
             }
         }
-        
+
         stage('build') {
             steps {
                 script {
