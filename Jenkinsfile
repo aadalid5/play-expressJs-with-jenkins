@@ -11,7 +11,7 @@ pipeline {
                 script{
                     def dockerHome = tool 'mydocker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
-                    sh "sudo service docker start"
+                    sh "service docker start"
                 }
             }
         }
