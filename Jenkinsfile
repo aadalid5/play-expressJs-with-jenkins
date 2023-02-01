@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS=credentials('dockerhub_aa')
+        DOCKERHUB_CREDENTIALS=credentials('docker_user_pass') // 'dockerhub_aa'
     }
 
     stages {
@@ -29,10 +29,12 @@ pipeline {
             steps {
                 //sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 
-                withCredentials([usernamePassword(credentialsId: 'docker_user_pass', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                    echo "${PASS}"
-                    sh "docker login -u ${USER} -p ${PASS}"
-                }
+                // withCredentials([usernamePassword(credentialsId: 'docker_user_pass', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                //     echo "${PASS}"
+                //     sh "docker login -u ${USER} -p ${PASS}"
+                // }
+
+                sh "docker login -u $DOCKERHUB_CREDENTIALS_USR  -p $DOCKERHUB_CREDENTIALS_PSW"
             }
         }
 
