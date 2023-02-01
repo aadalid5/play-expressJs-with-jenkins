@@ -35,16 +35,16 @@ pipeline {
             }
         }
 
-        // stage('push') {
-        //     steps {
-        //         sh "docker push arieladalid/test-node"
-        //     }
-        // }
+        stage('push') {
+            steps {
+                sh "docker push arieladalid/test-node"
+            }
+        }
     }
 }
 
-// post {
-//     always {
-//         sh "docker logout"
-//     }
-// }
+post {
+    always {
+        sh "docker logout"
+    }
+}
