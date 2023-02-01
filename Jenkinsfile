@@ -18,6 +18,7 @@ pipeline {
         stage('build') {
             steps {
                 script {
+                    sh "docker --version"
                     dockerImage = docker.build("arieladalid/test-node")
                 }
             }
