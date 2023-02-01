@@ -30,6 +30,7 @@ pipeline {
                 //sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 
                 withCredentials([usernamePassword(credentialsId: 'docker_user_pass', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    echo "${PASS}"
                     sh "docker login -u ${USER} -p ${PASS}"
                 }
             }
@@ -41,10 +42,11 @@ pipeline {
             }
         }
     }
-}
 
-post {
-    always {
-        sh "docker logout"
+    post {
+        always {
+                sh "docker logout"
+            }
     }
 }
+
