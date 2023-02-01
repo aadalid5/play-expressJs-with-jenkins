@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS=credentials('docker_user_pass') // 'dockerhub_aa'
+        DOCKERHUB_CREDENTIALS=credentials('docker_user_pass') // 'dockerhub_aa' (token) error -stdin :( 
     }
 
     stages {
@@ -27,14 +27,21 @@ pipeline {
 
         stage('login') {
             steps {
+                // error: '--password-stdin not recognized'
+                // ------------------------------------------------
                 //sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 
+
+                // OK :), but security warning: "A secret was passed to "sh" using Groovy String interpolation"
+                // ------------------------------------------------
                 // withCredentials([usernamePassword(credentialsId: 'docker_user_pass', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                 //     echo "${PASS}"
                 //     sh "docker login -u ${USER} -p ${PASS}"
                 // }
 
-                sh "docker login -u $DOCKERHUB_CREDENTIALS_USR  -p $DOCKERHUB_CREDENTIALS_PSW"
+
+                // ok : )
+                sh('docker login -u $DOCKERHUB_CREDENTIALS_USR  -p $DOCKERHUB_CREDENTIALS_PSW')
             }
         }
 
