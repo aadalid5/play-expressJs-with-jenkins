@@ -27,8 +27,10 @@ pipeline {
 
         stage('login') {
             steps {
-                script {
-                    sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                //sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+
+                withCredentials([usernamePassword(credentialsId: 'docker_user_pass', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh "docker login -u ${USER} -p ${PASS}"
                 }
             }
         }
