@@ -12,3 +12,7 @@
 
 * Orchestate microservices with docker-compose
     - db microservice
+
+## Last changes http
+- add cors to server
+- add new endpoints
