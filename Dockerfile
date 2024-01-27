@@ -1,7 +1,9 @@
-FROM node:16
+FROM node:18-alpine
 WORKDIR /usr/src/app
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 COPY . .
+
+ENV ENVIRONMENT=local2
 EXPOSE 4000
 CMD ["node", "server.js"]

@@ -2,6 +2,7 @@
 
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config()
 
 const PORT = 4000;
 const HOST = '0.0.0.0';
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json()); // parses stringified objects (?)
 
 app.get('/', (req, res)=>{
+    console.log(process.env.ENVIRONMENT)
     res.send("hello express");
 });
 
